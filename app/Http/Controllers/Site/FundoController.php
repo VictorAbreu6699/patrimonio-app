@@ -14,7 +14,7 @@ class FundoController extends Controller
      */
     public function index()
     {
-        //
+        return view('site.fundo.index');
     }
 
     /**
@@ -46,7 +46,7 @@ class FundoController extends Controller
      */
     public function show($slug)
     {
-        return view('site.fundos.show', ['slug' => $slug]);
+        return view('site.fundo.show', ['slug' => $slug]);
     }
 
     /**
