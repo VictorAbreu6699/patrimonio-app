@@ -1,9 +1,9 @@
 @extends('templates.template')
 
 @section('title')
-Informações
+Patrimonio
 @endsection
 
 @section('content')
-teste
+Página de patrimonio
 @endsection
