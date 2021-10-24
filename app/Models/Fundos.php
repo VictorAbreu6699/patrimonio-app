@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fundos extends Model
 {
-    protected $table='fundos';
+    protected $table = 'fundos';
 }

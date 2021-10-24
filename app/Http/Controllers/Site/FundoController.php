@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PatrimonioController extends Controller
+class FundoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class PatrimonioController extends Controller
      */
     public function index()
     {
-        return view("index");
+        //
     }
 
     /**
@@ -40,12 +41,12 @@ class PatrimonioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        return view('site.fundos.show', ['slug' => $slug]);
     }
 
     /**
