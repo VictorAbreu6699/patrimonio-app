@@ -14,27 +14,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', 'App\Http\Controllers\Site\GraficoController');
+Route::get('/', 'App\Http\Controllers\Site\HistoricoController@index')->name('site.infos');
+Route::post('/', 'App\Http\Controllers\Site\HistoricoController@filter')->name('site.infos.filter');
 
 /*Patrimonio*/
 
-Route::get('/patrimonio', 'App\Http\Controllers\Site\PatrimonioController@index');
+Route::get('/patrimonio', 'App\Http\Controllers\Site\PatrimonioController@index')->name('site.patrimonio');
 
-Route::get('/patrimonio/{slug}', 'App\Http\Controllers\Site\PatrimonioController@show');
-
-Route::post('/patrimonio', 'App\Http\Controllers\Site\PatrimonioController@create');
+Route::post('/patrimonio', 'App\Http\Controllers\Site\PatrimonioController@store')->name('site.patrimonio.store');
 
 /*Patrimonio*/
 
 /*Fundos*/
 
-Route::get('/fundo', 'App\Http\Controllers\Site\FundoController@index');
+Route::get('/fundo', 'App\Http\Controllers\Site\FundoController@index')->name('site.fundo');
 
-Route::get('/fundo/{slug}', 'App\Http\Controllers\Site\FundoController@show');
+Route::post('/fundo', 'App\Http\Controllers\Site\FundoController@store')->name('site.fundo.store');
 
-Route::post('/fundo', 'App\Http\Controllers\Site\FundoController@create');
+Route::get('/fundo/{id}/edit', 'App\Http\Controllers\Site\FundoController@edit')->name('site.fundo.edit');
 
+Route::post('/fundo/{id}/edit', 'App\Http\Controllers\Site\FundoController@update')->name('site.fundo.update');
 
+Route::get('/fundo/{id}/delete', 'App\Http\Controllers\Site\FundoController@delete')->name('site.fundo.delete');
+
+Route::post('/fundo/{id}/delete', 'App\Http\Controllers\Site\FundoController@destroy')->name('site.fundo.destroy');
 /*Fundos*/
 
 

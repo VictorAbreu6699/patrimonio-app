@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PatrimonioFormRequest;
+use App\Models\Patrimonios;
+use App\Models\Fundos;
+
 
 class PatrimonioController extends Controller
 {
@@ -13,8 +17,8 @@ class PatrimonioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('site.patrimonio.index');
+    {        
+      return view ('site.patrimonio.index', ['patrimonios' => Patrimonios::all(), 'fundos' => Fundos::all()]);     
     }
 
     /**
@@ -33,9 +37,13 @@ class PatrimonioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PatrimonioFormRequest $request)
     {
-        //
+        Patrimonios::create($request->all());
+        
+        return redirect()->route('site.patrimonio')->with(
+            ['sucess' => true, 'message' => 'Patrimonio registrado com sucesso!']
+        );
     }
 
     /**
@@ -46,7 +54,7 @@ class PatrimonioController extends Controller
      */
     public function show($slug)
     {
-        return view('site.patrimonio.show', ['slug' => $slug]);
+       
     }
 
     /**

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FundoFormRequest;
 use Illuminate\Http\Request;
+use App\Models\Fundos;
+use Illuminate\Support\Facades\DB;
 
 class FundoController extends Controller
 {
@@ -14,7 +17,9 @@ class FundoController extends Controller
      */
     public function index()
     {
-        return view('site.fundo.index');
+        return view('site.fundo.index', [
+            'fundos' => Fundos::all()
+        ]);
     }
 
     /**
@@ -24,7 +29,7 @@ class FundoController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -33,9 +38,13 @@ class FundoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FundoFormRequest $request)
     {
-        //
+        Fundos::create($request->all());
+        
+        return redirect()->route('site.fundo')->with(
+            ['sucess' => true, 'message' => 'Fundo registrado com sucesso!']
+        );
     }
 
     /**
@@ -46,7 +55,7 @@ class FundoController extends Controller
      */
     public function show($slug)
     {
-        return view('site.fundo.show', ['slug' => $slug]);
+        
     }
 
     /**
@@ -57,7 +66,8 @@ class FundoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fundo = Fundos::find($id);
+        return view('site.fundo.edit', ['fundo' => $fundo]);
     }
 
     /**
@@ -67,9 +77,12 @@ class FundoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FundoFormRequest $request)
     {
-        //
+        DB::update('update fundos set name = ? where id = ?', [$request->name, $request->id]);
+        return redirect()->route('site.fundo')->with(
+            ['sucess' => true, 'message' => 'Fundo atualizado com sucesso!']
+        );
     }
 
     /**
@@ -80,6 +93,10 @@ class FundoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return view('site.fundo');
+    }
+
+    public function delete($id){
+        return view('site.fundo.delete', ['id' => $id]);
     }
 }
